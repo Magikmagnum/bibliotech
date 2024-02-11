@@ -1,0 +1,13 @@
+
+<div class="container-flex">
+  <div [ngClass]="{'container-grid-2': carteLivreClique, 'container-grid': !carteLivreClique}">
+    <div class="col-2" *ngFor="let livre of livresStore">
+      <app-carte-livre [livre]="livre" (click)="onCarteLivreClick(livre.id)"></app-carte-livre>
+    </div>
+  </div>
+  <div class="container-resume" *ngIf="carteLivreClique">
+    <div class="container-fix">
+      <app-carte-resume></app-carte-resume>
+    </div>
+  </div>
+</div>

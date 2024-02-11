@@ -1,0 +1,65 @@
+.carte-boxe{
+  height: 380px;
+  margin: 24px;
+  /* background-color: azure; */
+}
+
+.carte-image{
+  width: 100%;
+  height: 380px;
+  border-radius: 32px;
+  background-color: rgb(209, 209, 209);
+  object-fit: cover;
+
+}
+
+
+
+.carte-body{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 12px;
+}
+
+
+.carte-title{
+  font: 2em sans-serif;
+  font-weight: bold;
+  color: rgba(89, 89, 89, 1);
+}
+
+.carte-intertitle{
+  font: 1em sans-serif;
+  color:rgba(110, 110, 110, 1);
+}
+
+
+.carte-subtitle{
+  color: rgba(250, 162, 30, 1);
+  font: 1em sans-serif;
+  /* font-weight: bold; */
+}
+
+.carte-resume{
+  margin: 12px;
+}
+
+.carte-resume-text{
+  line-height: 28px;
+  letter-spacing: 1px;
+  color: #6E6E6E;
+}
+
+.carte-btn-boxe {
+  margin: 24px 12px;
+}
+
+.carte-btn{
+  background-color: #FAA21E;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 32px;
+  font-weight: bold;
+  color: #fff;
+}

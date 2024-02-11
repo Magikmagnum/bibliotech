@@ -1,0 +1,12 @@
+<div *ngIf="chapitres.length > 0">
+  <ul>
+    <li *ngFor="let chapitre of chapitres; let i = index"
+        [class.chapitre-selectionne]="i === chapitreSelectionne"
+        (click)="selectionnerChapitre(i)">
+        Chapitre {{ chapitre.id }}: {{ chapitre.nom }}
+    </li>
+  </ul>
+</div>
+<div *ngIf="chapitres.length === 0">
+  <p>Aucun chapitre disponible.</p>
+</div>

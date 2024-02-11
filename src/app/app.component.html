@@ -7,7 +7,7 @@
 <!-- * * * * * * * to get started with your project! * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
-<style>
+<!-- <style>
   :host {
     --bright-blue: oklch(51.01% 0.274 263.83);
     --electric-violet: oklch(53.18% 0.28 296.97);
@@ -322,7 +322,7 @@
       </div>
     </div>
   </div>
-</main>
+</main> -->
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
@@ -332,5 +332,26 @@
 <!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
+
+<mat-toolbar  classe="">
+    <span classe="">{{ title }}</span>
+
+    <!-- This fills the remaining space of the current row -->
+    <span class=" nav-fill-remaining-space "></span>
+
+    <span classe=""><a routerLink="/" >Home</a></span>
+    <span classe=""><a routerLink="/meslivres">Login</a></span>
+    <!-- <span classe=""><a routerLink="/carteLivre">carte</a></span>
+    <span classe=""><a routerLink="/carteResume">resume</a></span>
+    <span classe=""><a routerLink="/carteLire">lecture</a></span>
+    <span classe=""><a routerLink="/listeschapitre">listes chapitre</a></span> -->
+</mat-toolbar>
+
+<!-- <mat-tab-group>
+  <mat-tab label="First"> Content 1 </mat-tab>
+  <mat-tab label="Second"> Content 2 </mat-tab>
+  <mat-tab label="Third"> Content 3 </mat-tab>
+  <mat-tab label="Third"> Content 3 </mat-tab>
+</mat-tab-group> -->
 
 <router-outlet />

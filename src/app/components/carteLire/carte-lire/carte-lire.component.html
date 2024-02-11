@@ -1,0 +1,30 @@
+<div class="carte-boxe">
+
+  <div class="carte-body">
+    <div class="carte-title">{{livre?.nom}}</div>
+    <div class="carte-subtitle">{{livre?.auteur}}</div>
+  </div>
+
+  <div class="carte-resume">
+    <p class="carte-resume-text">
+        {{currentContent}}
+    </p>
+  </div>
+
+  <div class="carte-btn-boxe">
+
+    <div class="carte-page">
+      <div class="carte-num-box">
+        <div class="carte-page-num">{{currentPage}}</div>
+        <div class="carte-page-num-title">Pages</div>
+      </div>
+    </div>
+
+    <div>
+      <button class="carte-btn" (click)="goToPreviousPage()">Précédent</button>
+      <button class="carte-btn carte-btn-action" (click)="goToNextPage()">Suivant</button>
+    </div>
+
+  </div>
+
+</div>
