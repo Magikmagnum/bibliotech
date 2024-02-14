@@ -1,0 +1,19 @@
+<div class="registration-container">
+    <h2>Inscription</h2>
+    <form (ngSubmit)="register()">
+        <input type="text" name="firstName" [(ngModel)]="userData.firstName" placeholder="Prenom" required>
+        <input type="text" name="lastName" [(ngModel)]="userData.lastName" placeholder="Nom " required>
+        <input type="email" name="email" [(ngModel)]="userData.email" placeholder="Email" required>
+        <input type="password" name="password" [(ngModel)]="userData.password" placeholder="Mot de passe" required>
+
+        <mat-form-field>
+            <mat-label>roles</mat-label>
+            <mat-select name="roles" [(ngModel)]="selectedRoles" multiple>
+                <mat-option value="user">Utilisateur</mat-option>
+                <mat-option value="author">Auteur</mat-option>
+
+            </mat-select>
+        </mat-form-field>
+        <button type="submit">S'inscrire</button>
+    </form>
+</div>
