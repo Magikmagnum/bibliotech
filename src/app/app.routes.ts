@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { MeslivresComponent } from './meslivres/meslivres.component';
 import { ShowComponent } from './show/show.component';
-import { EditComponent } from './meslivres/edit/edit.component';
+import { EditComponent } from './edit/edit.component';
 import { DetailComponent } from './meslivres/detail/detail.component';
 import { inject } from '@angular/core';
 import { CarteLivreComponent } from './components/carteLivre/carte-livre/carte-livre.component';

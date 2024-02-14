@@ -10,6 +10,8 @@ import { ListeschapitreComponent } from '../components/listeschapitre/listeschap
   templateUrl: './show.component.html',
   styleUrl: './show.component.css'
 })
+
+
 export class ShowComponent {
     livre = {
       nom: "Les Rêves d'Éther",
@@ -17,5 +19,4 @@ export class ShowComponent {
       genre: "Polar",
       image: "assets/images/img1.jpeg"
     }
-
 }

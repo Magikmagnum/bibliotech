@@ -5,6 +5,7 @@ export interface Livre {
   id: number;
   nom: string;
   auteur: string;
+  userId: number,
   genre: string;
   image: string;
   chapitres: {
@@ -26,6 +27,7 @@ export class LivreListeService {
       id: 1,
       nom: "Les Rêves d'Éther",
       auteur: "Eric Gansa Diambote",
+      userId: 1,
       genre: "Polar",
       image: "assets/images/img1.jpeg",
       chapitres: [
@@ -34,7 +36,7 @@ export class LivreListeService {
           pages: [
             {
               numero: 1,
-              content: "Emma se réveilla un matin dans un monde où ses rêves étaient devenus réalité. Chaque coin de rue, chaque visage rencontré lui semblait familier, comme si elle avait déjà vécu ces moments dans un rêve lointain. Intriguée et un peu effrayée, elle décida de suivre le fil de son destin, guidée par une force mystérieuse."
+              content: "Emma se réveilla un matin dans un monde où ses rêves étaient devenus réalité. Chaque coin de rue, chaque visage rencontré lui semblait familier, comme si elle avait déjà vécu ces moments dans un rêve lointain. Intriguée et un peu effrayée, elle décida de suivre le fil de son destin, guidée par une force mystérieuse. Intriguée et un peu effrayée par cette étrange réalité, Emma se laissa emporter par la curiosité et la fascination qui l'envahissaient. Les rues familières semblaient maintenant chargées de significations cachées, chaque rencontre portait en elle une aura de déjà-vu troublant. Guidée par une force mystérieuse qui semblait la pousser inexorablement en avant, elle se lança courageusement dans l'inconnu, déterminée à percer le mystère de cette étrange transformation. Au fur et à mesure qu\'elle progressait à travers ce monde étrangement familier, Emma découvrit des réponses qui suscitaient en elle des questions encore plus profondes. Les gens qu\'elle rencontrait semblaient tous avoir un lien avec elle, même si elle ne pouvait pas encore comprendre la nature de ces liens. Chaque indice, chaque signe semblait la guider un peu plus loin sur le chemin de la vérité, mais cette vérité restait encore insaisissable, se dérobant à ses tentatives de la Pourtant, malgré les défis et les incertitudes qui jonchaient son chemin, Emma sentait en elle une force croissante, une détermination indomptable qui la poussait à continuer, à persévérer malgré les obstacles. Car au fond d\'elle-même, elle savait que la réponse à ses questions, la clé de son destin, l\'attendait quelque part, cachée dans l\'ombre des mystères qui entouraient Et ainsi, avec chaque pas qu\'elle faisait, chaque découverte qu\'elle faisait, Emma se rapprochait un peu plus de la vérité qui l\'attendait au bout de ce voyage extraordinaire. Guidée par la lumière de sa propre détermination et de sa foi en l\'inconnu, elle avançait avec courage dans les rues de ce monde où les rêves devenaient réalité, prête à affronter tout ce qui se dresserait sur son chemin, pour enfin comprendre le sens profond de son existence."
             },
             {
               numero: 2,
@@ -77,6 +79,7 @@ export class LivreListeService {
       id: 2,
       nom: "Le Mystère de la Chambre Jaune",
       auteur: "Gaston Leroux",
+      userId: 2,
       genre: "Mystère",
       image: "assets/images/img2.jpeg",
       chapitres: [
@@ -128,6 +131,7 @@ export class LivreListeService {
       id: 3,
       nom: "Le Tour du monde en quatre-vingts jours",
       auteur: "Jules Verne",
+      userId: 3,
       genre: "Aventure",
       image: "assets/images/img3.jpeg",
       chapitres: [
@@ -180,6 +184,7 @@ export class LivreListeService {
       nom: "1984",
       auteur: "George Orwell",
       genre: "Science-fiction",
+      userId: 4,
       image: "assets/images/img4.jpg",
       chapitres: [
         {
@@ -223,6 +228,7 @@ export class LivreListeService {
       nom: "Le Seigneur des Anneaux",
       auteur: "J.R.R. Tolkien",
       genre: "Fantasy",
+      userId: 6,
       image: "assets/images/img6.jpeg",
       chapitres: [
         {
@@ -274,6 +280,7 @@ export class LivreListeService {
       nom: "Harry Potter à l'école des sorciers",
       auteur: "J.K. Rowling",
       genre: "Fantasy",
+      userId: 7,
       image: "assets/images/img7.jpeg",
       chapitres: [
         {
@@ -328,6 +335,14 @@ export class LivreListeService {
     return this.livres;
   }
 
+  public getUserLivres(userId: number): Livre[] | [] {
+    return this.livres.filter(livre => livre.userId === userId);
+  }
+
+  public getLivreById(livreId: number): Livre | undefined {
+    return this.livres.find(livre => livre.id === livreId);
+  }
+
   public setLivreSelectId(id: number): void {
     this.curentLivre = id;
   }
@@ -348,3 +363,7 @@ export class LivreListeService {
     }
   }
 }
+
+
+// modifier un text
+// supprimer du text

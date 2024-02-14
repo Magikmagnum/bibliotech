@@ -1,8 +1,15 @@
 <div class="carte-boxe">
 
   <div class="carte-body">
-    <div class="carte-title">{{livre?.nom}}</div>
-    <div class="carte-subtitle">{{livre?.auteur}}</div>
+    <div class="carte-body-text">
+      <div class="carte-title">{{livre?.nom}}</div>
+      <div class="carte-subtitle">{{chapitreName}}</div>
+    </div>
+    <div>
+      <button class="carte-btn" (click)="goToPreviousPage()">Supprimer</button>
+      <button class="carte-btn carte-btn-segment" (click)="goToNextPage(currentChapitre, currentPage)">Modifier</button>
+      <button class="carte-btn carte-btn-action" (click)="goToNextPage(currentChapitre, currentPage)">Ajouter</button>
+    </div>
   </div>
 
   <div class="carte-resume">
@@ -15,14 +22,14 @@
 
     <div class="carte-page">
       <div class="carte-num-box">
-        <div class="carte-page-num">{{currentPage}}</div>
+        <div class="carte-page-num">{{totalPages}}</div>
         <div class="carte-page-num-title">Pages</div>
       </div>
     </div>
 
     <div>
       <button class="carte-btn" (click)="goToPreviousPage()">Précédent</button>
-      <button class="carte-btn carte-btn-action" (click)="goToNextPage()">Suivant</button>
+      <button class="carte-btn carte-btn-action" (click)="goToNextPage(currentChapitre, currentPage)">Suivant</button>
     </div>
 
   </div>
