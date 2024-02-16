@@ -3,10 +3,11 @@
     <div class="col-2" *ngFor="let livre of livresStore">
       <app-carte-livre [livre]="livre" (click)="onCarteLivreClick(livre.id)"></app-carte-livre>
     </div>
+    <div class="col-2" *ngFor="let livre of livresStore">
+      <app-carte-livre [livre]="livre" (click)="onCarteLivreClick(livre.id)"></app-carte-livre>
+    </div>
   </div>
   <div class="container-resume" *ngIf="carteLivreClique">
-    <div class="container-fix">
-      <app-carte-resume></app-carte-resume>
-    </div>
+      <app-carte-resume class="bottom-sticky"></app-carte-resume>
   </div>
 </div>
