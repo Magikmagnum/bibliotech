@@ -10,21 +10,51 @@ import { CarteResumeComponent } from './components/carteResume/carte-resume/cart
 import { CarteLireComponent } from './components/carteLire/carte-lire/carte-lire.component';
 import { ListeschapitreComponent } from './components/listeschapitre/listeschapitre.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { AuthGuard } from './auth/auth.guard';
+import { LoginComponent } from './login/login.component';
+import { LogoutComponent } from './logout/logout.component';
 // import { AuthenticationService } from './services/authentication.service';
 
 export const routes: Routes = [
   { path: '', component: RegistrationComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'home/show', component: ShowComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'logout', component: LogoutComponent },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'home/show', component: ShowComponent, canActivate: [AuthGuard] },
   {
     path: 'meslivres',
     // canMatch:[() => inject(AuthenticationService).isAuthenticated],
     component: MeslivresComponent,
+    canActivate: [AuthGuard],
   },
-  { path: 'meslivres/detail', component: EditComponent },
-  { path: 'meslivres/edit', component: DetailComponent },
-  { path: 'carteLivre', component: CarteLivreComponent },
-  { path: 'carteResume', component: CarteResumeComponent },
-  { path: 'carteLire', component: CarteLireComponent },
-  { path: 'listeschapitre', component: ListeschapitreComponent },
+  {
+    path: 'meslivres/detail',
+    component: EditComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'meslivres/edit',
+    component: DetailComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'carteLivre',
+    component: CarteLivreComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'carteResume',
+    component: CarteResumeComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'carteLire',
+    component: CarteLireComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'listeschapitre',
+    component: ListeschapitreComponent,
+    canActivate: [AuthGuard],
+  },
 ];

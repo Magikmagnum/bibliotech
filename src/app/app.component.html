@@ -1,8 +1,12 @@
-<mat-toolbar  class="custom-toolbar">
+<mat-toolbar class="custom-toolbar">
     <span class="">{{ title }}</span>
     <span class=" nav-fill-remaining-space "></span>
-    <span class="nav-link"><a routerLink="/" >Home</a></span>
-    <span class="nav-link"><a routerLink="/meslivres">Mes livres</a></span>
+    <span class="nav-link" *ngIf="isLoggedIn()"><a routerLink="/home">Home</a></span>
+    <span class="nav-link" *ngIf="!isLoggedIn()"><a routerLink="/login">Connexion</a></span>
+    <span *ngIf="!isLoggedIn()" class="nav-link"><a routerLink="/">Incription</a></span>
+    <span class="nav-link" *ngIf="isLoggedIn()"><a routerLink="/meslivres">Mes livres</a></span>
+    <span class="nav-link" *ngIf="isLoggedIn()"><a routerLink="/logout">Deconnexion</a></span>
+
 </mat-toolbar>
 
 <router-outlet />

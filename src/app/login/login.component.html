@@ -1,0 +1,8 @@
+<div class="login-container">
+    <h2>Connexion</h2>
+    <form (submit)="login()">
+        <input type="email" name="email" [(ngModel)]="userData.email" required>
+        <input type="password" name="password" [(ngModel)]="userData.password" required>
+        <button type="submit">Connexion</button>
+    </form>
+</div>

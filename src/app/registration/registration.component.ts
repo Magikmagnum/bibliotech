@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../auth/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -41,10 +41,10 @@ export class RegistrationComponent {
     this.userData.roles = this.selectedRoles.join(',');
 
     this.authService.register(this.userData).subscribe(
-      (response) => {
+      () => {
         console.log('Inscription réussie');
         this.openSnackBar('Inscription réussie !');
-        this.router.navigate(['/home']);
+        this.router.navigate(['/login']);
         // Rediriger l'utilisateur vers une autre page ou effectuer d'autres actions après une inscription réussie
       },
       (error) => {
