@@ -1,12 +1,17 @@
 import { ApiCatService } from './../api.cat.service';
 import { Component } from '@angular/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
-
-
-
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
+
+
+interface LivreData {
+  title: string;
+  resume: string;
+  image: File| null;
+  categories: number[];
+}
 
 @Component({
   selector: 'app-livre-form',
@@ -24,17 +29,16 @@ import { MatSelectModule } from '@angular/material/select';
 })
 export class LivreFormComponent {
 
-  userData = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    ca: 'user', // Valeur par défaut du rôle
+  livreData: LivreData = {
+    title: '',
+    resume: '',
+    image: null,
+    categories: [],
   };
 
-  livreCategories = {};
+  livreCategories: any[] = [];
 
-  selectedCategories: string[] = [];
+  selectedCategories: number[] = [];
 
   constructor(private apiCatService: ApiCatService) {}
 
@@ -43,19 +47,26 @@ export class LivreFormComponent {
   }
 
   addLivre() {
+    this.livreData.categories = this.selectedCategories
 
+
+    console.log('test addLivre',  this.livreData); // Vérifiez la réponse dans la console
   }
 
   getCategories() {
     this.apiCatService.getCategories().subscribe(
       (response: any) => {
-        console.log('test ngOnInit', response); // Vérifiez la réponse dans la console
         this.livreCategories = response; // Stockez les catégories dans this.livreCategories
       },
       (error) => {
         console.error('Une erreur s\'est produite lors de la récupération des catégories :', error);
       }
     );
+  }
+
+  // Méthode pour gérer la sélection de fichier
+  onFileSelected(event: any): void {
+    this.livreData.image = event.target.files[0];
   }
 
 }

@@ -1,25 +1,18 @@
 <div class="registration-container">
   <h2>Crée un nouveau livre</h2>
   <form (ngSubmit)="addLivre()">
-      <input type="text" name="title" [(ngModel)]="userData.firstName" placeholder="Titre" required>
-      <textarea type="text" name="resume" [(ngModel)]="userData.lastName" placeholder="Resumer " required></textarea>
-      <input type="file" name="image" [(ngModel)]="userData.email" placeholder="Image" required>
+      <input type="text" name="title" [(ngModel)]="livreData.title" placeholder="Titre" required>
+      <textarea type="text" name="resume" [(ngModel)]="livreData.resume" placeholder="Resumer " required></textarea>
+      <!-- <input type="file" name="image" [(ngModel)]="livreData.image" placeholder="Image" required> -->
+      <input type="file" (change)="onFileSelected($event)" accept="image/*" required> <!-- Ajout de l'événement change -->
 
       <mat-form-field>
         <mat-label>Catégories</mat-label>
         <mat-select name="categories" [(ngModel)]="selectedCategories" multiple>
-          <mat-option value="Romans">Romans</mat-option>
-          <mat-option value="Science-fiction">Science-fiction</mat-option>
-          <mat-option value="Fantasy">Fantasy</mat-option>
-          <mat-option value="Thriller">Thriller</mat-option>
-          <mat-option value="Polar">Polar</mat-option>
-          <mat-option value="Mystère">Mystère</mat-option>
-          <mat-option value="Aventure">Aventure</mat-option>
-          <mat-option value="Horreur">Horreur</mat-option>
-          <mat-option value="Biographie">Biographie</mat-option>
-          <mat-option value="Poésie">Poésie</mat-option>
+          <mat-option *ngFor="let category of livreCategories" [value]="category.id">{{ category.label }}</mat-option>
         </mat-select>
       </mat-form-field>
+
       <button type="submit">Ajouter</button>
   </form>
 </div>
