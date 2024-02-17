@@ -19,7 +19,7 @@ export interface Food {
 }
 
 @Component({
-    selector: 'app-home',
+    selector: 'app-mylivre',
     standalone: true,
     templateUrl: './meslivres.component.html',
     styleUrl: './meslivres.component.css',
@@ -44,6 +44,10 @@ export class MeslivresComponent {
   onCarteLivreClick(id: number) {
     this.livreListeService.setLivreSelectId(id);
     this.router.navigate(['/home/show']);
+  }
+
+  addLivreNav( ){
+    this.router.navigate(['/addlivre']);
   }
 
 }

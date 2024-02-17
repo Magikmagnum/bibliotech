@@ -13,6 +13,12 @@ import { RegistrationComponent } from './registration/registration.component';
 import { AuthGuard } from './auth/auth.guard';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
+
+import { LivreFormComponent } from './livre-form/livre-form.component'
+import { ChapitreFormComponent } from './chapitre-form/chapitre-form.component'
+import { PageFormComponent } from './page-form/page-form.component'
+
+
 // import { AuthenticationService } from './services/authentication.service';
 
 export const routes: Routes = [
@@ -23,10 +29,25 @@ export const routes: Routes = [
   { path: 'home/show', component: ShowComponent, canActivate: [AuthGuard] },
   {
     path: 'meslivres',
-    // canMatch:[() => inject(AuthenticationService).isAuthenticated],
     component: MeslivresComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: 'addlivre',
+    component: LivreFormComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'addchapitre',
+    component: ChapitreFormComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'addpage',
+    component: PageFormComponent,
+    canActivate: [AuthGuard],
+  },
+
   {
     path: 'meslivres/detail',
     component: EditComponent,
@@ -56,5 +77,5 @@ export const routes: Routes = [
     path: 'listeschapitre',
     component: ListeschapitreComponent,
     canActivate: [AuthGuard],
-  },
+  }
 ];

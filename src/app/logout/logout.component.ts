@@ -29,6 +29,7 @@ export class LogoutComponent implements OnInit {
 
     this.router.navigate(['/login']);
   }
+
   openSnackBar(message: string) {
     this.snackBar.open(message, 'Fermer', {
       duration: 3000, // Durée d'affichage du toast en millisecondes

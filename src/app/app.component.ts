@@ -31,6 +31,7 @@ export class AppComponent {
   title = 'Bibliotech';
 
   constructor(private authService: AuthService) {}
+
   isLoggedIn(): boolean {
     return this.authService.isLoggedIn;
   }

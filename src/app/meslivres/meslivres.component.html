@@ -1,5 +1,8 @@
-
 <div class="container-flex">
+
+  <button (click)="addLivreNav()">Aller à une autre page</button>
+
+
   <div [ngClass]="{'container-grid-2': carteLivreClique, 'container-grid': !carteLivreClique}">
     <div class="col-2" *ngFor="let livre of livresStore">
       <app-carte-livre [livre]="livre" (click)="onCarteLivreClick(livre.id)"></app-carte-livre>
