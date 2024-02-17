@@ -42,7 +42,7 @@ export class RegistrationComponent {
 
     this.authService.register(this.userData).subscribe(
       (response) => {
-        console.log('Inscription réussie', response);
+        console.log('Inscription réussie');
         this.openSnackBar('Inscription réussie !');
         this.router.navigate(['/home']);
         // Rediriger l'utilisateur vers une autre page ou effectuer d'autres actions après une inscription réussie
