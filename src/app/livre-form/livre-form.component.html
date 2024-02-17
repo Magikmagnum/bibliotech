@@ -1,18 +1,17 @@
 <div class="registration-container">
   <h2>Crée un nouveau livre</h2>
   <form (ngSubmit)="addLivre()">
-      <input type="text" name="title" [(ngModel)]="livreData.title" placeholder="Titre" required>
-      <textarea type="text" name="resume" [(ngModel)]="livreData.resume" placeholder="Resumer " required></textarea>
-      <!-- <input type="file" name="image" [(ngModel)]="livreData.image" placeholder="Image" required> -->
-      <input type="file" (change)="onFileSelected($event)" accept="image/*" required> <!-- Ajout de l'événement change -->
+    <input type="text" name="title" [(ngModel)]="livreData.title" placeholder="Titre" required>
+    <textarea type="text" name="resume" [(ngModel)]="livreData.resume" placeholder="Resumer " required></textarea>
+    <input type="file" (change)="onFileSelected($event)" accept="image/*" required>
 
-      <mat-form-field>
-        <mat-label>Catégories</mat-label>
-        <mat-select name="categories" [(ngModel)]="selectedCategories" multiple>
-          <mat-option *ngFor="let category of livreCategories" [value]="category.id">{{ category.label }}</mat-option>
-        </mat-select>
-      </mat-form-field>
+    <mat-form-field>
+      <mat-label>Catégories</mat-label>
+      <mat-select name="categories" [(ngModel)]="selectedCategories" multiple>
+        <mat-option *ngFor="let category of livreCategories" [value]="category.id">{{ category.label }}</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-      <button type="submit">Ajouter</button>
+    <button type="submit">Ajouter</button>
   </form>
 </div>

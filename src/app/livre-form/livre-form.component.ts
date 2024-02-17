@@ -1,15 +1,17 @@
-import { ApiCatService } from './../api.cat.service';
+import { ApiCatService, ApiLivreService } from '../api.service';
 import { Component } from '@angular/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 interface LivreData {
   title: string;
   resume: string;
-  image: File| null;
+  image: FormData | null;
   categories: number[];
 }
 
@@ -36,21 +38,46 @@ export class LivreFormComponent {
     categories: [],
   };
 
+  imageForm: FormGroup;
+  selectedFile: File | null = null;
+
+
   livreCategories: any[] = [];
 
   selectedCategories: number[] = [];
 
-  constructor(private apiCatService: ApiCatService) {}
+  constructor(private apiCatService: ApiCatService, private apiLivreService: ApiLivreService, private fb: FormBuilder) {
+    this.imageForm = this.fb.group({
+      image: ['', Validators.required]
+    });
+  }
 
   ngOnInit(): void {
     this.getCategories();
   }
 
   addLivre() {
-    this.livreData.categories = this.selectedCategories
 
+    this.apiLivreService.addImageLivre({file: this.selectedFile}).subscribe(data => {
+      console.log(data);
+    });
 
-    console.log('test addLivre',  this.livreData); // Vérifiez la réponse dans la console
+    // this.livreData.categories = this.selectedCategories;
+
+    // if(this.selectedFile) {
+    //   const formData = new FormData();
+    //   formData.append('image', this.selectedFile, this.selectedFile.name);
+    //   this.livreData.image = formData;
+    // }
+
+    // this.apiLivreService.addLivre(this.livreData).subscribe(
+    //   (response: any) => {
+    //     console.log('Réponse de addLivre:', response);
+    //   },
+    //   (error) => {
+    //     console.error('Une erreur s\'est produite lors de l\'ajout du livre :', error);
+    //   }
+    // );
   }
 
   getCategories() {
@@ -66,7 +93,10 @@ export class LivreFormComponent {
 
   // Méthode pour gérer la sélection de fichier
   onFileSelected(event: any): void {
-    this.livreData.image = event.target.files[0];
+    const file: File = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+    }
   }
 
 }
