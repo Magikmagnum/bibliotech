@@ -57,8 +57,10 @@
   position: relative;
 }
 
-.container-fix{
+
+.bottom-sticky {
   flex: 2;
   position: fixed;
+  overflow-y: auto;
+  height: -webkit-fill-available;
 }
-
