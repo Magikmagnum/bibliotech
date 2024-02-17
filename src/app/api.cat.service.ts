@@ -6,8 +6,6 @@ import { AuthService } from './auth/auth.service';
   providedIn: 'root',
 })
 export class ApiCatService {
-  isLoggedIn = false;
-  private readonly TOKEN_KEY = 'jwt_token';
   apiUrl = 'http://34.163.165.4:3000';
 
   constructor(private http: HttpClient, private authService: AuthService) {}
