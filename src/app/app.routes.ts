@@ -14,10 +14,9 @@ import { AuthGuard } from './auth/auth.guard';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 
-import { LivreFormComponent } from './livre-form/livre-form.component'
-import { ChapitreFormComponent } from './chapitre-form/chapitre-form.component'
-import { PageFormComponent } from './page-form/page-form.component'
-
+import { LivreFormComponent } from './livre-form/livre-form.component';
+import { ChapitreFormComponent } from './chapitre-form/chapitre-form.component';
+import { PageFormComponent } from './page-form/page-form.component';
 
 // import { AuthenticationService } from './services/authentication.service';
 
@@ -35,6 +34,11 @@ export const routes: Routes = [
   {
     path: 'addlivre',
     component: LivreFormComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'addChapter',
+    component: ChapitreFormComponent,
     canActivate: [AuthGuard],
   },
   {
@@ -77,5 +81,5 @@ export const routes: Routes = [
     path: 'listeschapitre',
     component: ListeschapitreComponent,
     canActivate: [AuthGuard],
-  }
+  },
 ];

@@ -1,1 +1,15 @@
-<p>chapitre-form works!</p>
+<div class="chapter-container">
+    <h2>Crée un nouveau chapitre</h2>
+    <form (ngSubmit)="addChapter()">
+        <input type="text" name="title" [(ngModel)]="chapterData.title" placeholder="Titre" required>
+
+        <mat-form-field>
+            <mat-label>Livres</mat-label>
+            <mat-select name="livres" [(ngModel)]="selectedLivres" multiple>
+                <mat-option *ngFor="let livre of livreList" [value]="livre.id">{{ livre.title }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <button type="submit">Ajouter</button>
+    </form>
+</div>
