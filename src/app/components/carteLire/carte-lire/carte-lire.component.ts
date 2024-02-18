@@ -1,4 +1,4 @@
-import { Component, OnInit  } from '@angular/core';
+import { Component, Input, OnInit  } from '@angular/core';
 import { Livre, LivreListeService } from '../../../livres-list.service';
 import { NgFor, NgIf } from '@angular/common';
 import { Router } from '@angular/router';
@@ -10,7 +10,10 @@ import { Router } from '@angular/router';
   templateUrl: './carte-lire.component.html',
   styleUrl: './carte-lire.component.css'
 })
-export class CarteLireComponent implements OnInit {
+export class CarteLireComponent {
+
+  @Input()livree!: any;
+
 
   livre: Livre | undefined;
   currentChapitre: number = 1;
@@ -24,6 +27,9 @@ export class CarteLireComponent implements OnInit {
   constructor(private livreListeService: LivreListeService, private router: Router, ) { }
 
   ngOnInit(): void {
+
+    console.log('livree dans CarteLireComponent:', this.livree);
+
     // Appelez getLivres() dans ngOnInit()
     this.livre = this.livreListeService.getLivreSelected();
     this.chapitres = this.getChapitresList();
@@ -31,7 +37,12 @@ export class CarteLireComponent implements OnInit {
     // Sélectionner automatiquement le chapitre en cours
     this.chapitreSelectionne = this.currentChapitre - 1;
     this.chapitreName = this.livre ? this.livre.chapitres[this.currentChapitre -1 ].nom : '';
+
   }
+
+  // ngOnChanges() {
+  //   console.log('livree dans ngOnChanges:', this.livree);
+  // }
 
 
   // Fonction pour récupérer la liste des chapitres
@@ -53,13 +64,19 @@ export class CarteLireComponent implements OnInit {
 
   // Fonction pour récupérer le contenu de la page du chapitre courant
   getPageContent(): string {
-    if (this.livre && this.currentChapitre >= 1 && this.currentChapitre <= this.livre.chapitres.length) {
-      const chapitre = this.livre.chapitres[this.currentChapitre - 1];
-      if (this.currentPage >= 1 && this.currentPage <= chapitre.pages.length) {
-        return chapitre.pages[this.currentPage - 1].content;
-      }
+
+    if(this.livree.pages.length > 0) {
+      return this.livree.pages[0];
     }
+
     return '';
+    // if (this.livre && this.currentChapitre >= 1 && this.currentChapitre <= this.livre.chapitres.length) {
+    //   const chapitre = this.livre.chapitres[this.currentChapitre - 1];
+    //   if (this.currentPage >= 1 && this.currentPage <= chapitre.pages.length) {
+    //     return chapitre.pages[this.currentPage - 1].content;
+    //   }
+    // }
+    // return '';
   }
 
 

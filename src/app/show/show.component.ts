@@ -24,6 +24,9 @@ export class ShowComponent {
 
   livre: any = {};
   livreId: any;
+  chapitres: any = {};
+  pages: any = {};
+
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
       this.livreId = params['livreId'];

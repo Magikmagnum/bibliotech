@@ -35,6 +35,7 @@ export interface Food {
 })
 export class MeslivresComponent {
   livresStore: any = []; // Déclarez livresStore ici
+  carteLivreClique = false; // variable pour suivre si un élément a été cliqué
 
   constructor(
     private livreListeService: LivreListeService,
@@ -50,11 +51,17 @@ export class MeslivresComponent {
 
   getUserLivres(): void {
     this.apiLivreService.getLivresList().subscribe((data) => {
-      this.livresStore = data;
-      console.log(this.livresStore);
+      if (data) {
+        this.livresStore = data;
+        console.log(this.livresStore);
+      } else {
+        console.error("Aucune donnée n'a été récupérée.");
+      }
+    }, (error) => {
+      console.error("Une erreur s'est produite lors de la récupération des livres :", error);
     });
   }
-  carteLivreClique = false; // variable pour suivre si un élément a été cliqué
+
 
   // Fonction pour gérer le clic sur un élément carte livre
   // Méthode appelée lorsque vous cliquez sur la carte de livre

@@ -1,4 +1,4 @@
-import { Component, OnInit  } from '@angular/core';
+import { Component, Input, OnInit  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgFor, NgIf } from '@angular/common';
 import { Livre, LivreListeService } from '../../livres-list.service';
@@ -11,6 +11,8 @@ import { Livre, LivreListeService } from '../../livres-list.service';
   styleUrl: './listeschapitre.component.css'
 })
 export class ListeschapitreComponent implements OnInit {
+
+  @Input() livree: any;
   livre: Livre | undefined;
   curentChapitre: number = 1;
   chapitres: { id: number, nom: string }[] = [];

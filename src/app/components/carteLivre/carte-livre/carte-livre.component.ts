@@ -11,4 +11,8 @@ export class CarteLivreComponent {
   @Input() livre: any;
   // Définir livre comme une propriété d'entrée
   constructor() {}
+
+  ngOnInit(): void {
+    console.log('livree dans coucou:', this.livre);
+  }
 }
