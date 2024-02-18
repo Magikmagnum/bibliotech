@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth/auth.service';
 
-const API_URL = 'http://127.0.0.1:3000';
+const API_URL = 'http://34.163.165.4:3000';
 
 @Injectable({
   providedIn: 'root',
@@ -41,6 +41,22 @@ export class ApiLivreService {
   addChapter(chapterData: any) {
     const token = this.authService.getToken();
     return this.http.post(`${this.apiUrl}/chapters`, chapterData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+  addPages(pageData: any) {
+    const token = this.authService.getToken();
+    return this.http.post(`${this.apiUrl}/pages`, pageData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+  getLivre(id: number) {
+    const token = this.authService.getToken();
+    return this.http.get(`${this.apiUrl}/livres/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
