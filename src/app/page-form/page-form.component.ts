@@ -14,8 +14,8 @@ import { MatInputModule } from '@angular/material/input';
 
 interface PageData {
   contenu: string;
-  livreId: string;
-  chapterId: string;
+  livre: number | null;
+  chapter: number | null;
   pageNumber: number;
 }
 
@@ -38,8 +38,8 @@ interface PageData {
 export class PageFormComponent {
   pageData: PageData = {
     contenu: '',
-    livreId: '',
-    chapterId: '',
+    livre: null,
+    chapter: null,
     pageNumber: 1,
   };
 
@@ -52,16 +52,17 @@ export class PageFormComponent {
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
-      this.pageData.livreId = params['livreId'];
-      this.pageData.chapterId = params['chapterId'];
+      this.pageData.livre = params['livreId'];
+      this.pageData.chapter = params['chapterId'];
     });
   }
   addPages(): void {
+    console.log(this.pageData.livre, this.pageData.chapter);
     this.apiLivreService.addPages(this.pageData).subscribe((response: any) => {
       this.openSnackBar('Ajout réussie !');
       //this.router.navigate(['/meslivres']);
       this.router.navigate(['/home/show'], {
-        queryParams: { livreId: this.pageData.livreId },
+        queryParams: { livreId: this.pageData.livre },
       });
     });
   }
