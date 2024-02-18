@@ -35,10 +35,8 @@ export class ShowComponent {
   }
 
   getLivre(): void {
-    console.log(this.livreId);
     this.apiLivreService.getLivre(this.livreId).subscribe((response) => {
       this.livre = response;
-      console.log(response);
     });
   }
 }

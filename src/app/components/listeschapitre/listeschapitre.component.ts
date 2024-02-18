@@ -34,4 +34,9 @@ export class ListeschapitreComponent implements OnInit {
     this.livre = this.livreListeService.getLivreSelected();
     this.chapitres = this.livreListeService.getChapitresList();
   }
+
+
+  ngOnChanges() {
+    console.log('ngOnChanges ListeschapitreComponent', );
+  }
 }

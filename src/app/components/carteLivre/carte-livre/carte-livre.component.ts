@@ -13,6 +13,6 @@ export class CarteLivreComponent {
   constructor() {}
 
   ngOnInit(): void {
-    console.log('livree dans coucou:', this.livre);
+    // console.log('livree dans coucou:', this.livre);
   }
 }

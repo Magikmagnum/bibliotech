@@ -19,7 +19,7 @@ export class CarteLireComponent {
   currentChapitre: number = 1;
   chapitres: { id: number, nom: string, selected: boolean }[] = [];
   currentPage: number = 1;
-  currentContent: string = '';
+  currentContent: string = 'coucoucou';
   chapitreSelectionne: number = 0;
   totalPages: number = 1;
   chapitreName: string = '';
@@ -27,22 +27,23 @@ export class CarteLireComponent {
   constructor(private livreListeService: LivreListeService, private router: Router, ) { }
 
   ngOnInit(): void {
-
-    console.log('livree dans CarteLireComponent:', this.livree);
-
+    console.log('---------------------------livree dans CarteLireComponent:', this.currentContent);
     // Appelez getLivres() dans ngOnInit()
     this.livre = this.livreListeService.getLivreSelected();
     this.chapitres = this.getChapitresList();
-    this.currentContent = this.getPageContent();
+    //this.currentContent = this.getPageContent();
     // Sélectionner automatiquement le chapitre en cours
     this.chapitreSelectionne = this.currentChapitre - 1;
     this.chapitreName = this.livre ? this.livre.chapitres[this.currentChapitre -1 ].nom : '';
 
   }
 
-  // ngOnChanges() {
-  //   console.log('livree dans ngOnChanges:', this.livree);
-  // }
+
+  ngOnChanges() {
+    this.currentContent = this.livree.pages[0].contenu;
+    console.log('livree dans CarteLireComponent:', this.currentContent);
+  }
+
 
 
   // Fonction pour récupérer la liste des chapitres
@@ -66,10 +67,10 @@ export class CarteLireComponent {
   getPageContent(): string {
 
     if(this.livree.pages.length > 0) {
-      return this.livree.pages[0];
+      return this.livree.pages[0].contenu;
     }
-
     return '';
+
     // if (this.livre && this.currentChapitre >= 1 && this.currentChapitre <= this.livre.chapitres.length) {
     //   const chapitre = this.livre.chapitres[this.currentChapitre - 1];
     //   if (this.currentPage >= 1 && this.currentPage <= chapitre.pages.length) {
@@ -195,9 +196,3 @@ export class CarteLireComponent {
 
 }
 
-
-
-
-// recuperer la liste des chapitres
-// recuperer la liste des pages
-// recuperer le text
