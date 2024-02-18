@@ -4,7 +4,8 @@
 
     <mat-form-field>
       <mat-label>Text</mat-label>
-      <textarea class="textarea" matInput name="content" placeholder="Ecrivez votre text" [(ngModel)]="page" required></textarea>
+      <textarea class="textarea" matInput name="content" placeholder="Ecrivez votre text" [(ngModel)]="pageData.contenu"
+        required></textarea>
     </mat-form-field>
 
 
@@ -12,4 +13,3 @@
     <button type="submit">Ajouter</button>
   </form>
 </div>
-

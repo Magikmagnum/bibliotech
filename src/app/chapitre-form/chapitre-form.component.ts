@@ -26,7 +26,6 @@ interface chapterData {
     MatSelectModule,
     ReactiveFormsModule,
 
-
     MatInputModule,
     MatButtonModule,
   ],
@@ -54,13 +53,13 @@ export class ChapitreFormComponent {
   selectedLivres: number[] = [];
 
   addChapter() {
-    this.router.navigate(['/addpage']);
     this.chapterData.livreId = this.selectedLivres;
     this.apiLivreService
       .addChapter(this.chapterData)
       .subscribe((response: any) => {
         this.openSnackBar('Ajout réussie !');
-        this.router.navigate(['/meslivres']);
+        //this.router.navigate(['/meslivres']);
+        this.router.navigate(['/addpage']);
       });
   }
 
