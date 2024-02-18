@@ -6,6 +6,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { Router } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+
 
 @Component({
   standalone: true,
@@ -14,11 +17,13 @@ import { Router } from '@angular/router';
     CommonModule,
     FormsModule,
     MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
     MatSelectModule,
     ReactiveFormsModule,
   ],
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.css'],
+  styleUrls: ['./registration.component.css', '../login/login.component.css'],
 })
 export class RegistrationComponent {
   userData = {

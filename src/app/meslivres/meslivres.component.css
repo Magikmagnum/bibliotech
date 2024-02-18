@@ -62,3 +62,38 @@
   position: fixed;
 }
 
+
+.container-addlivre {
+  /* height: 200px; */
+  background-color: antiquewhite;
+  padding: 24px;
+  margin: 24px;
+  border-radius: 32px;
+  max-width: 800px;
+  display: flex;
+  flex-direction: row;
+  /* justify-content: center; */
+  /* align-items: center; */
+  gap: 24px;
+}
+
+.addlivreBtn{
+  border: none;
+  width: 100px;
+  height: 100px;
+  border-radius: 32px;
+  font-size: 63px;
+  background: #fff;
+}
+
+.container-body{
+  flex: 1;
+}
+
+.addlivreText {
+  margin: 0px;
+}
+
+.addlivreTitle{
+  font-weight: bold;
+}

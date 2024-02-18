@@ -1,6 +1,53 @@
 <div class="registration-container">
   <h2>Crée un nouveau livre</h2>
   <form (ngSubmit)="addLivre()" enctype="multipart/form-data">
+
+    <mat-form-field>
+      <mat-label>Titre</mat-label>
+      <input matInput type="text" name="title" [(ngModel)]="livreData.title" placeholder="Titre" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Resumer</mat-label>
+      <textarea matInput type="text" name="resume" [(ngModel)]="livreData.resume" placeholder="Resumer " required></textarea>
+    </mat-form-field>
+
+  <!-- <mat-form-field>
+      <mat-label>Image</mat-label>
+      <input matInput type="file" (change)="onFileSelected($event)" accept="image/*" required>
+    </mat-form-field> -->
+    <input type="file" (change)="onFileSelected($event)" accept="image/*" required>
+
+   <mat-form-field>
+      <mat-label>Catégories</mat-label>
+      <mat-select name="categories" [(ngModel)]="selectedCategories" multiple>
+        <mat-option *ngFor="let category of livreCategories" [value]="category.id">{{ category.label }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- <button mat-raised-button type="submit">Ajouter</button> -->
+    <button type="submit">Ajouter</button>
+  </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="registration-container">
+  <h2>Crée un nouveau livre</h2>
+  <form (ngSubmit)="addLivre()" enctype="multipart/form-data">
+
+
     <input type="text" name="title" [(ngModel)]="livreData.title" placeholder="Titre" required>
     <textarea type="text" name="resume" [(ngModel)]="livreData.resume" placeholder="Resumer " required></textarea>
     <input type="file" (change)="onFileSelected($event)" accept="image/*" required>
@@ -14,4 +61,4 @@
 
     <button type="submit">Ajouter</button>
   </form>
-</div>
+</div> -->

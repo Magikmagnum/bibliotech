@@ -9,6 +9,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+
 interface LivreData {
   title: string;
   resume: string;
@@ -20,15 +23,16 @@ interface LivreData {
   selector: 'app-livre-form',
   standalone: true,
   imports: [
-    MatFormFieldModule,
     CommonModule,
     FormsModule,
     MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
     MatSelectModule,
     ReactiveFormsModule,
   ],
   templateUrl: './livre-form.component.html',
-  styleUrl: './livre-form.component.css',
+  styleUrls: ['./livre-form.component.css', '../login/login.component.css'],
 })
 export class LivreFormComponent {
   livreData: LivreData = {
@@ -82,7 +86,7 @@ export class LivreFormComponent {
       (response: any) => {
         console.log('Réponse de addLivre:', response);
         this.openSnackBar('Ajout réussie !');
-        this.router.navigate(['/meslivres']);
+        this.router.navigate(['/addchapitre']);
       },
       (error) => {
         this.openSnackBar('Ajout échoué !');
@@ -92,6 +96,9 @@ export class LivreFormComponent {
         );
       }
     );
+
+    this.router.navigate(['/addchapitre']);
+
   }
 
   getCategories() {

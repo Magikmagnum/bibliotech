@@ -1,0 +1,10 @@
+.page-container {
+  max-width: 800px;
+  margin: 4% auto;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.textarea {
+  height: 400px;
+}

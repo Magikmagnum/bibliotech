@@ -36,11 +36,11 @@ export const routes: Routes = [
     component: LivreFormComponent,
     canActivate: [AuthGuard],
   },
-  {
-    path: 'addChapter',
-    component: ChapitreFormComponent,
-    canActivate: [AuthGuard],
-  },
+  // {
+  //   path: 'addChapter',
+  //   component: ChapitreFormComponent,
+  //   canActivate: [AuthGuard],
+  // },
   {
     path: 'addchapitre',
     component: ChapitreFormComponent,
@@ -54,12 +54,12 @@ export const routes: Routes = [
 
   {
     path: 'meslivres/detail',
-    component: EditComponent,
+    component: DetailComponent,
     canActivate: [AuthGuard],
   },
   {
-    path: 'meslivres/edit',
-    component: DetailComponent,
+    path: 'edit',
+    component:  EditComponent,
     canActivate: [AuthGuard],
   },
   {

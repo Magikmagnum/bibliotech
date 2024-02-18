@@ -1,8 +1,28 @@
-<div class="login-container">
+<!-- <div class="login-container">
     <h2>Connexion</h2>
     <form (submit)="login()">
         <input type="email" name="email" [(ngModel)]="userData.email" required>
         <input type="password" name="password" [(ngModel)]="userData.password" required>
         <button type="submit">Connexion</button>
     </form>
+</div> -->
+
+<div class="login-container">
+  <h2>Connexion</h2>
+  <form (ngSubmit)="login()">
+
+    <mat-form-field>
+      <mat-label>E-mail</mat-label>
+      <input matInput type="email" name="email" placeholder="E-mail" [(ngModel)]="userData.email" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Mot de passe</mat-label>
+      <input matInput type="password" name="password" [(ngModel)]="userData.password" placeholder="mot de passe" required>
+    </mat-form-field>
+
+    <button type="submit">Connexion</button>
+  </form>
 </div>
+
+

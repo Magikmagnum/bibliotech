@@ -1,1 +1,15 @@
-<p>page-form works!</p>
+<div class="page-container ">
+  <h2>Nouvelle page</h2>
+  <form (ngSubmit)="addPages()">
+
+    <mat-form-field>
+      <mat-label>Text</mat-label>
+      <textarea class="textarea" matInput name="content" placeholder="Ecrivez votre text" [(ngModel)]="page" required></textarea>
+    </mat-form-field>
+
+
+
+    <button type="submit">Ajouter</button>
+  </form>
+</div>
+

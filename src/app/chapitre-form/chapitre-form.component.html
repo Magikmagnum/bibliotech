@@ -1,7 +1,12 @@
 <div class="chapter-container">
     <h2>Crée un nouveau chapitre</h2>
     <form (ngSubmit)="addChapter()">
-        <input type="text" name="title" [(ngModel)]="chapterData.title" placeholder="Titre" required>
+        <!-- <input type="text" name="title" [(ngModel)]="chapterData.title" placeholder="Titre" required> -->
+
+        <mat-form-field>
+          <mat-label>Chapitre</mat-label>
+          <input matInput type="title" name="firstName" [(ngModel)]="chapterData.title" placeholder="Chapitre" required>
+        </mat-form-field>
 
         <mat-form-field>
             <mat-label>Livres</mat-label>

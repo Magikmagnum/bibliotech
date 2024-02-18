@@ -1,9 +1,18 @@
+<div class="container-addlivre">
+  <button class="addlivreBtn" (click)="addLivreNav()">+</button>
+  <!-- <button (click)="addChapterNav()">Ajouter un chapter</button>
+  <button (click)="addPageNav()">Ajouter une page</button> -->
+  <div class="container-body">
+    <h3 class="addlivreTitle">Nouveau livre</h3>
+    <p class="addlivreText">L'ajout d'un livre dans une application est une étape essentielle qui contribue à enrichir son contenu et à fournir une expérience utilisateur plus complète.
+      Que ce soit dans une application de gestion de bibliothèque, une plateforme de partage de connaissances, ou même un réseau social dédié aux lecteurs,
+      permettre aux utilisateurs d'ajouter des livres présente plusieurs avantages à la fois pour l'application et pour la communauté.
+      Voici quelques points à considérer
+    </p>
+  </div>
+</div>
+
 <div class="container-flex">
-
-  <button (click)="addLivreNav()">Ajouter un Livre</button>
-  <button (click)="addChapterNav()">Ajouter un chapter</button>
-
-
   <div [ngClass]="{'container-grid-2': carteLivreClique, 'container-grid': !carteLivreClique}">
     <div class="col-2" *ngFor="let livre of livresStore">
       <app-carte-livre [livre]="livre" (click)="onCarteLivreClick(livre.id)"></app-carte-livre>

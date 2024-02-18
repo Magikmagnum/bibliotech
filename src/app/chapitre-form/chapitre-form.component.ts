@@ -8,6 +8,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { ApiLivreService } from '../api.service';
 
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+
 interface chapterData {
   title: string;
   livreId: number[];
@@ -22,9 +25,13 @@ interface chapterData {
     MatFormFieldModule,
     MatSelectModule,
     ReactiveFormsModule,
+
+
+    MatInputModule,
+    MatButtonModule,
   ],
   templateUrl: './chapitre-form.component.html',
-  styleUrl: './chapitre-form.component.css',
+  styleUrls: ['./chapitre-form.component.css', '../login/login.component.css'],
 })
 export class ChapitreFormComponent {
   chapterData: chapterData = {
@@ -47,6 +54,7 @@ export class ChapitreFormComponent {
   selectedLivres: number[] = [];
 
   addChapter() {
+    this.router.navigate(['/addpage']);
     this.chapterData.livreId = this.selectedLivres;
     this.apiLivreService
       .addChapter(this.chapterData)

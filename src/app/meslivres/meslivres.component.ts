@@ -55,8 +55,13 @@ export class MeslivresComponent {
 
   addLivreNav() {
     this.router.navigate(['/addlivre']);
+    // this.router.navigate(['/edit']);
+
   }
   addChapterNav() {
-    this.router.navigate(['/addChapter']);
+    this.router.navigate(['/addchapitre']);
+  }
+  addPageNav(){
+    this.router.navigate(['/addpage']);
   }
 }
