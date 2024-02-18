@@ -13,7 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 
 interface chapterData {
   title: string;
-  livreId: number[];
+  livre: number | null;
 }
 @Component({
   selector: 'app-chapitre-form',
@@ -35,7 +35,7 @@ interface chapterData {
 export class ChapitreFormComponent {
   chapterData: chapterData = {
     title: '',
-    livreId: [],
+    livre: null,
   };
 
   constructor(
@@ -50,16 +50,22 @@ export class ChapitreFormComponent {
 
   livreList: any[] = [];
 
-  selectedLivres: number[] = [];
+  selectedLivres: number | null = null;
 
   addChapter() {
-    this.chapterData.livreId = this.selectedLivres;
+    console.log(this.selectedLivres);
+    this.chapterData.livre = this.selectedLivres;
     this.apiLivreService
       .addChapter(this.chapterData)
       .subscribe((response: any) => {
         this.openSnackBar('Ajout réussie !');
         //this.router.navigate(['/meslivres']);
-        this.router.navigate(['/addpage']);
+        this.router.navigate(['/addpage'], {
+          queryParams: {
+            livreId: this.selectedLivres,
+            chapterId: response.id,
+          },
+        });
       });
   }
 
