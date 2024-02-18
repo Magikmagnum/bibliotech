@@ -53,7 +53,7 @@ export class MeslivresComponent {
     this.apiLivreService.getLivresList().subscribe((data) => {
       if (data) {
         this.livresStore = data;
-        console.log(this.livresStore);
+        // console.log(this.livresStore);
       } else {
         console.error("Aucune donnée n'a été récupérée.");
       }

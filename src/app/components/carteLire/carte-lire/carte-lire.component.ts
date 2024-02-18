@@ -19,38 +19,57 @@ export class CarteLireComponent {
   currentChapitre: number = 1;
   chapitres: { id: number, nom: string, selected: boolean }[] = [];
   currentPage: number = 1;
-  currentContent: string = 'coucoucou';
+  currentContent: string = '';
   chapitreSelectionne: number = 0;
   totalPages: number = 1;
   chapitreName: string = '';
 
   constructor(private livreListeService: LivreListeService, private router: Router, ) { }
 
+  // ngOnInit(): void {
+  //   // Appelez getLivres() dans ngOnInit()
+  //   this.livre = this.livreListeService.getLivreSelected();
+  //   this.chapitres = this.getChapitresList();
+  //   // Sélectionner automatiquement le chapitre en cours
+  //   this.chapitreSelectionne = this.currentChapitre - 1;
+  //   this.chapitreName = this.livree ? this.livree?.chapters[0].title : '';
+  // }
+
+
   ngOnInit(): void {
-    console.log('---------------------------livree dans CarteLireComponent:', this.currentContent);
     // Appelez getLivres() dans ngOnInit()
-    this.livre = this.livreListeService.getLivreSelected();
-    this.chapitres = this.getChapitresList();
-    //this.currentContent = this.getPageContent();
-    // Sélectionner automatiquement le chapitre en cours
-    this.chapitreSelectionne = this.currentChapitre - 1;
-    this.chapitreName = this.livre ? this.livre.chapitres[this.currentChapitre -1 ].nom : '';
+    // this.livre = this.livreListeService.getLivreSelected();
+    // this.chapitres = this.getChapitresList();
 
   }
 
 
   ngOnChanges() {
-    this.currentContent = this.livree.pages[0].contenu;
-    console.log('livree dans CarteLireComponent:', this.currentContent);
+    this.currentContent = this.getPageContent();
+    // console.log('livree dans CarteLireComponent:', this.currentContent);
+    console.log(this.livree)
+
+    // Sélectionner automatiquement le chapitre en cours
+    if (this.livree && this.livree.chapters && this.livree.chapters.length > 0) {
+      this.chapitreName = this.livree?.chapters[0].title;
+      this.chapitreSelectionne = this.currentChapitre - 1;
+      this.chapitres = this.getChapitresList();
+
+      console.log("-------------------------------------------", this.chapitres)
+    } else {
+      // Gérer le cas où le livre ou ses chapitres ne sont pas définis
+      this.chapitreSelectionne = 0;
+      this.chapitreName = '';
+    }
   }
 
 
 
   // Fonction pour récupérer la liste des chapitres
   getChapitresList(): { id: number, nom: string, selected: boolean }[] {
-    if (this.livre) {
-      const chapitresList = this.livre.chapitres.map((chapitre, index) => {
-        return { id: index + 1, nom: chapitre.nom, selected: false };
+    if (this.livree) {
+      const chapitresList = this.livree.chapters.map((chapitre: any, index : number) => {
+        return { id: index + 1, nom: chapitre.title, selected: false };
       });
 
       // Marquer le chapitre courant comme sélectionné
@@ -65,20 +84,12 @@ export class CarteLireComponent {
 
   // Fonction pour récupérer le contenu de la page du chapitre courant
   getPageContent(): string {
-
-    if(this.livree.pages.length > 0) {
+    if (this.livree && this.livree.pages && this.livree.pages.length > 0) {
       return this.livree.pages[0].contenu;
     }
     return '';
-
-    // if (this.livre && this.currentChapitre >= 1 && this.currentChapitre <= this.livre.chapitres.length) {
-    //   const chapitre = this.livre.chapitres[this.currentChapitre - 1];
-    //   if (this.currentPage >= 1 && this.currentPage <= chapitre.pages.length) {
-    //     return chapitre.pages[this.currentPage - 1].content;
-    //   }
-    // }
-    // return '';
   }
+
 
 
 
