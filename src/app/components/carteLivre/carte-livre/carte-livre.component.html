@@ -1,10 +1,10 @@
 <div class="carte-boxe">
   <div class="carte-image">
-    <img class="carte-image-file" src="http://34.163.165.4:3000{{livre.image}}" alt="placeholder" />
+    <img class="carte-image-file" [src]="livre?.image" alt="placeholder" />
   </div>
   <div class="carte-body">
-    <div class="carte-title">{{livre.name}}</div>
-    <div class="carte-intertitle">{{livre.author.firstName}}</div>
-    <div class="carte-subtitle">{{livre.categories[0].label}}</div>
+    <div class="carte-title">{{livre.title}}</div>
+    <div class="carte-intertitle">{{livre?.author?.firstName}}</div>
+    <div class="carte-subtitle">{{livre?.categories[0]?.label}}</div>
   </div>
 </div>

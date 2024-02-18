@@ -45,12 +45,13 @@ export class MeslivresComponent {
 
   ngOnInit(): void {
     // Appelez getLivres() dans ngOnInit()
-    this.livresStore = this.livreListeService.getUserLivres(1);
+    this.getUserLivres();
   }
 
   getUserLivres(): void {
     this.apiLivreService.getLivresList().subscribe((data) => {
       this.livresStore = data;
+      console.log(this.livresStore);
     });
   }
   carteLivreClique = false; // variable pour suivre si un élément a été cliqué
