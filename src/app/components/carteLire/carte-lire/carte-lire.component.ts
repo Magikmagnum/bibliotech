@@ -1,6 +1,7 @@
 import { Component, OnInit  } from '@angular/core';
 import { Livre, LivreListeService } from '../../../livres-list.service';
 import { NgFor, NgIf } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-carte-lire',
@@ -20,7 +21,7 @@ export class CarteLireComponent implements OnInit {
   totalPages: number = 1;
   chapitreName: string = '';
 
-  constructor(private livreListeService: LivreListeService) { }
+  constructor(private livreListeService: LivreListeService, private router: Router, ) { }
 
   ngOnInit(): void {
     // Appelez getLivres() dans ngOnInit()
@@ -60,11 +61,6 @@ export class CarteLireComponent implements OnInit {
     }
     return '';
   }
-
-
-
-
-
 
 
 
@@ -160,7 +156,24 @@ export class CarteLireComponent implements OnInit {
       this.currentPage = previousChapter.pages.length;
       this.totalPages--;
     }
+
     this.currentContent = this.getPageContent();
+  }
+
+
+  deletePage(livreId: number, chapitreId: number, pageId: number): void {
+    this.router.navigate(['/addpage'], { queryParams: { livreId, chapitreId, pageId } });
+  }
+
+
+  editPage(livreId: number, chapitreId: number, pageId: number): void {
+    this.router.navigate(['/addpage'], { queryParams: { livreId, chapitreId, pageId } });
+
+  }
+
+
+  ajoutePage(livreId: number, chapitreId: number, pageId: number): void {
+    this.router.navigate(['/addpage'], { queryParams: { livreId, chapitreId, pageId } });
   }
 
 }

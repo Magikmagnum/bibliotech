@@ -6,9 +6,9 @@
       <div class="carte-subtitle">{{chapitreName}}</div>
     </div>
     <div>
-      <button class="carte-btn" (click)="goToPreviousPage()">Supprimer</button>
-      <button class="carte-btn carte-btn-segment" (click)="goToNextPage(currentChapitre, currentPage)">Modifier</button>
-      <button class="carte-btn carte-btn-action" (click)="goToNextPage(currentChapitre, currentPage)">Ajouter</button>
+      <button class="carte-btn" (click)="deletePage(1, currentChapitre, currentPage)">Supprimer</button>
+      <button class="carte-btn carte-btn-segment" (click)="editPage(1, currentChapitre, currentPage)">Modifier</button>
+      <button class="carte-btn carte-btn-action" (click)="ajoutePage(1, currentChapitre, currentPage)">Ajouter</button>
     </div>
   </div>
 
