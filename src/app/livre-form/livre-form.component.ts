@@ -15,7 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 interface LivreData {
   title: string;
   resume: string;
-  image: FormData | null;
+  image: string;
   categories: number[];
 }
 
@@ -38,10 +38,9 @@ export class LivreFormComponent {
   livreData: LivreData = {
     title: '',
     resume: '',
-    image: null,
+    image: '',
     categories: [],
   };
-
   imageForm: FormGroup;
   selectedFile: File | null = null;
 
@@ -70,35 +69,31 @@ export class LivreFormComponent {
       console.error('No file selected');
       return;
     }
+
     const formData = new FormData();
     formData.append('file', this.selectedFile);
 
-    await this.apiLivreService
-      .addImageLivre(formData)
-      .subscribe((data: any) => {
-        console.log(data);
-        this.livreData.image = data.imgUrl;
-      });
+    try {
+      const imageResponse: any = await this.apiLivreService
+        .addImageLivre(formData)
+        .toPromise();
+      console.log(imageResponse);
+      this.livreData.image = `http://34.163.165.4:3000${imageResponse.imgUrl}`;
 
-    this.livreData.categories = this.selectedCategories;
+      this.livreData.categories = this.selectedCategories;
 
-    this.apiLivreService.addLivre(this.livreData).subscribe(
-      (response: any) => {
-        console.log('Réponse de addLivre:', response);
-        this.openSnackBar('Ajout réussie !');
-        this.router.navigate(['/addchapitre']);
-      },
-      (error) => {
-        this.openSnackBar('Ajout échoué !');
-        console.error(
-          "Une erreur s'est produite lors de l'ajout du livre :",
-          error
-        );
-      }
-    );
+      console.log(this.livreData);
+      await this.apiLivreService.addLivre(this.livreData).toPromise();
 
-    this.router.navigate(['/addchapitre']);
-
+      this.openSnackBar('Ajout réussie !');
+      this.router.navigate(['/addchapitre']);
+    } catch (error) {
+      this.openSnackBar('Ajout échoué !');
+      console.error(
+        "Une erreur s'est produite lors de l'ajout du livre :",
+        error
+      );
+    }
   }
 
   getCategories() {

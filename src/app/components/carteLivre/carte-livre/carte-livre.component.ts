@@ -5,9 +5,10 @@ import { Component, Input } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './carte-livre.component.html',
-  styleUrl: './carte-livre.component.css'
+  styleUrl: './carte-livre.component.css',
 })
 export class CarteLivreComponent {
-  @Input() livre: any; // Définir livre comme une propriété d'entrée
-  constructor() { }
+  @Input() livre: any;
+  // Définir livre comme une propriété d'entrée
+  constructor() {}
 }
