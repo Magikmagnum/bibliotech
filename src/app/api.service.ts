@@ -62,6 +62,14 @@ export class ApiLivreService {
       },
     });
   }
+  getLivres() {
+    const token = this.authService.getToken();
+    return this.http.get(`${this.apiUrl}/livres`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
 
   addImageLivre(imageLivreData: any) {
     const token = this.authService.getToken();
