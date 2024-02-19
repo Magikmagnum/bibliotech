@@ -1,30 +1,34 @@
-import { Component, Input, OnInit  } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Livre, LivreListeService } from '../../../livres-list.service';
 import { NgFor, NgIf } from '@angular/common';
 import { Router } from '@angular/router';
+import { ApiLivreService } from '../../../api.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-carte-lire',
   standalone: true,
   imports: [NgIf, NgFor],
   templateUrl: './carte-lire.component.html',
-  styleUrl: './carte-lire.component.css'
+  styleUrl: './carte-lire.component.css',
 })
 export class CarteLireComponent {
-
-  @Input()livree!: any;
-
+  @Input() livree!: any;
 
   livre: Livre | undefined;
   currentChapitre: number = 1;
-  chapitres: { id: number, nom: string, selected: boolean }[] = [];
+  chapitres: { id: number; title: string; selected: boolean }[] = [];
   currentPage: number = 1;
   currentContent: string = '';
   chapitreSelectionne: number = 0;
   totalPages: number = 1;
   chapitreName: string = '';
 
-  constructor(private livreListeService: LivreListeService, private router: Router, ) { }
+  constructor(
+    private livreService: ApiLivreService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {}
 
   // ngOnInit(): void {
   //   // Appelez getLivres() dans ngOnInit()
@@ -35,27 +39,33 @@ export class CarteLireComponent {
   //   this.chapitreName = this.livree ? this.livree?.chapters[0].title : '';
   // }
 
-
   ngOnInit(): void {
     // Appelez getLivres() dans ngOnInit()
     // this.livre = this.livreListeService.getLivreSelected();
     // this.chapitres = this.getChapitresList();
-
   }
-
 
   ngOnChanges() {
     this.currentContent = this.getPageContent();
+    this.totalPages =
+      this.livree.chapters[this.currentChapitre - 1]?.pages.length;
     // console.log('livree dans CarteLireComponent:', this.currentContent);
-    console.log(this.livree)
+    console.log(this.livree);
 
     // Sélectionner automatiquement le chapitre en cours
-    if (this.livree && this.livree.chapters && this.livree.chapters.length > 0) {
-      this.chapitreName = this.livree?.chapters[0].title;
+    if (
+      this.livree &&
+      this.livree.chapters &&
+      this.livree.chapters.length > 0
+    ) {
+      this.chapitreName = this.livree?.chapters[this.currentChapitre - 1].title;
       this.chapitreSelectionne = this.currentChapitre - 1;
       this.chapitres = this.getChapitresList();
 
-      console.log("-------------------------------------------", this.chapitres)
+      console.log(
+        '-------------------------------------------',
+        this.chapitres
+      );
     } else {
       // Gérer le cas où le livre ou ses chapitres ne sont pas définis
       this.chapitreSelectionne = 0;
@@ -63,14 +73,14 @@ export class CarteLireComponent {
     }
   }
 
-
-
   // Fonction pour récupérer la liste des chapitres
-  getChapitresList(): { id: number, nom: string, selected: boolean }[] {
+  getChapitresList(): { id: number; title: string; selected: boolean }[] {
     if (this.livree) {
-      const chapitresList = this.livree.chapters.map((chapitre: any, index : number) => {
-        return { id: index + 1, nom: chapitre.title, selected: false };
-      });
+      const chapitresList = this.livree.chapters.map(
+        (chapitre: any, index: number) => {
+          return { id: index + 1, title: chapitre.title, selected: false };
+        }
+      );
 
       // Marquer le chapitre courant comme sélectionné
       chapitresList[this.currentChapitre - 1].selected = true;
@@ -81,129 +91,122 @@ export class CarteLireComponent {
     }
   }
 
-
   // Fonction pour récupérer le contenu de la page du chapitre courant
   getPageContent(): string {
     if (this.livree && this.livree.pages && this.livree.pages.length > 0) {
-      return this.livree.pages[0].contenu;
+      return this.livree.pages[this.currentPage - 1].contenu;
     }
     return '';
   }
 
-
-
-
   // Méthode pour vérifier si la page actuelle est valide
   private isCurrentPageValid(): boolean {
-    return !!(
-      this.livre &&
-      this.livre.chapitres &&
-      this.livre.chapitres[this.currentChapitre - 1] &&
-      this.currentPage >= 1 &&
-      this.currentPage <= this.livre.chapitres[this.currentChapitre - 1].pages.length
+    if (
+      !this.livree ||
+      !this.livree.chapters ||
+      !this.livree.chapters[this.currentChapitre - 1]
+    ) {
+      return false; // Si livree, chapters ou le chapitre actuel n'est pas défini, la page n'est pas valide
+    }
+
+    const currentChapter = this.livree.chapters[this.currentChapitre - 1];
+    return (
+      this.currentPage >= 1 && this.currentPage <= currentChapter.pages.length
     );
   }
 
-
-  // Méthode pour vérifier si la page actuelle est valide
-  private isNextPageValid(currentChapitre: number, currentPage: number): boolean {
+  private isNextPageValid(
+    currentChapitre: number,
+    currentPage: number
+  ): boolean {
     return !!(
-      this.livre &&
-      this.livre.chapitres &&
-      this.livre.chapitres[currentChapitre] &&
-      this.livre.chapitres[currentChapitre].pages[currentPage + 1]
+      this.livree &&
+      this.livree.chapters &&
+      this.livree.chapters[currentChapitre - 1] &&
+      this.livree.chapters[currentChapitre - 1].pages[currentPage]
     );
-
   }
-
 
   // Méthode pour vérifier si la page actuelle est valide
   private isNextChapitreValid(currentChapitre: number): boolean {
     return !!(
-      this.livre &&
-      this.livre.chapitres &&
-      this.livre.chapitres[currentChapitre + 1]
+      this.livree &&
+      this.livree.chapters &&
+      this.livree.chapters[currentChapitre + 1]
     );
   }
+  // Méthode pour vérifier si la page actuelle est valide
 
   // Méthode pour aller à la page suivante
-  goToNextPage(currentChapitre: number, currentPage : number): void {
-
-
-    if (!this.livre || !this.livre.chapitres || !this.livre.chapitres.length || !this.isCurrentPageValid()) {
-      return; // Vérifier si this.livre et ses propriétés nécessaires sont définis
+  goToNextPage(currentChapitre: number, currentPage: number): void {
+    if (!this.livree || !this.livree.chapters || !this.livree.chapters.length) {
+      return; // Vérifier si this.livree et ses propriétés nécessaires sont définis
     }
 
-    // si la page suivant existe on recupere la recupere
-    if(this.isNextPageValid(currentChapitre - 1, (currentPage - 1))) {
-
-      const chapitre = this.livre.chapitres[currentChapitre - 1 ];
-
-      // On met a jout le chapitre
-      this.chapitreName = this.livre.chapitres[this.currentChapitre - 1 ].nom;
-
-      // On recupere les pages suivante.
-      this.currentContent =  chapitre.pages[currentPage].content;
-      // On incremente le numero la page courante.
+    const chapitre = this.livree.chapters[currentChapitre - 1];
+    if (this.isNextPageValid(currentChapitre, currentPage)) {
+      // Si la page suivante existe dans le chapitre actuel
+      this.currentContent = chapitre.pages[currentPage].contenu;
       this.currentPage++;
-      this.totalPages++;
-
-    // Si la page suivante n'existe pas.
-    } else if(this.isNextChapitreValid(currentChapitre - 1)){
-      // On incremente le chapitre suivant
-      const chapitre = this.livre.chapitres[currentChapitre];
-
-      // On met a jout le chapitre
-      this.chapitreName = this.livre.chapitres[this.currentChapitre].nom;
-
-      // On recupere la premier page
-      this.currentContent =  chapitre.pages[0].content;
-      // On incremente le numero la page suivante.
-      this.currentPage = 1;
+    } else if (this.isNextChapitreValid(currentChapitre)) {
+      // Si le chapitre suivant existe
       this.currentChapitre++;
-      this.totalPages++;
+      this.currentPage = 1; // Aller à la première page du chapitre suivant
+      this.chapitreName = this.livree.chapters[this.currentChapitre - 1].title;
+      this.chapitres = this.getChapitresList();
+      this.currentContent = this.getPageContent();
     }
   }
 
-  // Méthode pour aller à la page précédente
   goToPreviousPage(): void {
-
-    if (!this.livre || !this.livre.chapitres || !this.livre.chapitres.length || !this.isCurrentPageValid()) {
-      return; // Vérifier si this.livre et ses propriétés nécessaires sont définis
+    if (!this.livree || !this.livree.chapters || !this.livree.chapters.length) {
+      return; // Vérifier si this.livree et ses propriétés nécessaires sont définis
     }
 
-    const currentChapter = this.livre.chapitres[this.currentChapitre - 1];
     if (this.currentPage > 1) {
-      // Si ce n'est pas la première page du chapitre actuel, reculer d'une page
+      // Si ce n'est pas la première page du chapitre actuel
       this.currentPage--;
-      this.totalPages--;
     } else if (this.currentChapitre > 1) {
-      // Si c'est la première page du chapitre actuel et qu'il y a un chapitre précédent, passer au chapitre précédent
+      // Si c'est la première page et il y a un chapitre précédent
       this.currentChapitre--;
-      const previousChapter = this.livre.chapitres[this.currentChapitre - 1];
-      // Aller à la dernière page du chapitre précédent
-      this.currentPage = previousChapter.pages.length;
-      this.totalPages--;
+      this.chapitreName = this.livree.chapters[this.currentChapitre - 1].title;
+      this.chapitres = this.getChapitresList();
+      this.currentPage =
+        this.livree.chapters[this.currentChapitre - 1].pages.length;
     }
-
     this.currentContent = this.getPageContent();
   }
 
+  deletePage(livreId: number): void {
+    this.livreService.deleteLivre(livreId).subscribe(
+      (data) => {
+        this.openSnackBar(' la suppression a réussi !');
 
-  deletePage(livreId: number, chapitreId: number, pageId: number): void {
-    this.router.navigate(['/addpage'], { queryParams: { livreId, chapitreId, pageId } });
+        this.router.navigate(['/meslivres']);
+      },
+      (error) => {
+        this.openSnackBar(
+          " Vous n'êtes surement pas autorisé à supprimer ce livre !"
+        );
+        console.error("Erreur lors de l'inscription", error);
+      }
+    );
   }
 
-
-  editPage(livreId: number, chapitreId: number, pageId: number): void {
-    this.router.navigate(['/addpage'], { queryParams: { livreId, chapitreId, pageId } });
-
+  openSnackBar(message: string) {
+    this.snackBar.open(message, 'Fermer', {
+      duration: 3000, // Durée d'affichage du toast en millisecondes
+    });
+  }
+  editPage(pageId: number, livreId: number): void {
+    this.router.navigate(['/addpage'], {
+      queryParams: { livreId: livreId, pageId: pageId },
+    });
   }
 
-
-  ajoutePage(livreId: number, chapitreId: number, pageId: number): void {
-    this.router.navigate(['/addpage'], { queryParams: { livreId, chapitreId, pageId } });
+  ajoutePage(livreId: number, chapitreId: number): void {
+    this.router.navigate(['/addpage'], {
+      queryParams: { livreId: livreId, chapterId: chapitreId },
+    });
   }
-
 }
-

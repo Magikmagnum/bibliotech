@@ -43,6 +43,8 @@ export class PageFormComponent {
     pageNumber: 1,
   };
 
+  pageId = null;
+  contenu = '';
   constructor(
     private apiLivreService: ApiLivreService,
     private snackBar: MatSnackBar,
@@ -54,17 +56,38 @@ export class PageFormComponent {
     this.route.queryParams.subscribe((params) => {
       this.pageData.livre = params['livreId'];
       this.pageData.chapter = params['chapterId'];
+      this.pageId = params['pageId'];
     });
+    if (this.pageId != null) {
+      this.apiLivreService.getPage(this.pageId).subscribe((data: any) => {
+        this.contenu = data.contenu;
+      });
+    }
   }
   addPages(): void {
-    console.log(this.pageData.livre, this.pageData.chapter);
-    this.apiLivreService.addPages(this.pageData).subscribe((response: any) => {
-      this.openSnackBar('Ajout réussie !');
-      //this.router.navigate(['/meslivres']);
-      this.router.navigate(['/home/show'], {
-        queryParams: { livreId: this.pageData.livre },
-      });
-    });
+    if (this.pageId != null) {
+      console.log(this.pageData);
+      this.apiLivreService
+        .editPages(this.pageId, { contenu: this.pageData.contenu })
+        .subscribe((data) => {
+          this.openSnackBar('Modif réussie !');
+          //this.router.navigate(['/meslivres']);
+          this.router.navigate(['/home/show'], {
+            queryParams: { livreId: this.pageData.livre },
+          });
+        });
+    } else {
+      console.log(this.pageData.livre, this.pageData.chapter);
+      this.apiLivreService
+        .addPages(this.pageData)
+        .subscribe((response: any) => {
+          this.openSnackBar('Ajout réussie !');
+          //this.router.navigate(['/meslivres']);
+          this.router.navigate(['/home/show'], {
+            queryParams: { livreId: this.pageData.livre },
+          });
+        });
+    }
   }
 
   openSnackBar(message: string) {

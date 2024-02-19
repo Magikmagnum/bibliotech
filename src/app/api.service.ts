@@ -54,6 +54,23 @@ export class ApiLivreService {
       },
     });
   }
+  editPages(id: number, pageData: any) {
+    const token = this.authService.getToken();
+    return this.http.put(`${this.apiUrl}/pages/${id}`, pageData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  getPage(id: number) {
+    const token = this.authService.getToken();
+    return this.http.get(`${this.apiUrl}/pages/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
   getLivre(id: number) {
     const token = this.authService.getToken();
     return this.http.get(`${this.apiUrl}/livres/${id}`, {
@@ -65,6 +82,15 @@ export class ApiLivreService {
   getLivres() {
     const token = this.authService.getToken();
     return this.http.get(`${this.apiUrl}/livres`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  deleteLivre(id: number) {
+    const token = this.authService.getToken();
+    return this.http.get(`${this.apiUrl}/livres/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
