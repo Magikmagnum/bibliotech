@@ -46,6 +46,7 @@ export class HomeComponent {
 
   carteLivreClique = false; // variable pour suivre si un élément a été cliqué
 
+  livreClicked = null;
   getLivres(): void {
     this.apiLivreService.getLivres().subscribe((data) => {
       this.livresStore = data;
@@ -53,8 +54,8 @@ export class HomeComponent {
   }
   // Fonction pour gérer le clic sur un élément carte livre
   // Méthode appelée lorsque vous cliquez sur la carte de livre
-  onCarteLivreClick(id: number) {
-    this.livreListeService.setLivreSelectId(id);
+  onCarteLivreClick(clicked: any) {
+    this.livreClicked = clicked;
     this.carteLivreClique = !this.carteLivreClique; // Inverse la valeur de carteLivreClique
   }
 }
